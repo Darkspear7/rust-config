@@ -154,8 +154,9 @@ use std::iter;
 use types::{SettingsList, Setting, Value, ScalarValue, ArrayValue, ListValue, Config};
 
 use nom::{alpha, alphanumeric, digit, multispace, not_line_ending};
-use nom::{IResult, Needed};
+use nom::{IResult};
 use nom::IResult::*;
+use nom::Err::Code;
 
 pub type ParseError = u32;
 
@@ -582,7 +583,7 @@ fn eof(input:&[u8]) -> IResult<&[u8], &[u8]> {
     if input.len() == 0 {
         Done(input, input)
     } else {
-        Error(0)
+        Error(Code(0))
     }
 }
 
